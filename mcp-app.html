@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Color Picker</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        background: #0f0f0f;
+        color: #f0f0f0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 24px;
+      }
+
+      .card {
+        background: #1a1a1a;
+        border: 1px solid #2a2a2a;
+        border-radius: 16px;
+        padding: 28px;
+        width: 100%;
+        max-width: 360px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      }
+
+      h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      h2 span {
+        font-size: 20px;
+      }
+
+      .preview {
+        width: 100%;
+        height: 120px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        border: 1px solid #2a2a2a;
+        transition: background 0.2s ease;
+      }
+
+      .color-input-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+
+      input[type="color"] {
+        width: 52px;
+        height: 52px;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        padding: 2px;
+        background: #2a2a2a;
+        flex-shrink: 0;
+      }
+
+      input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+      }
+
+      input[type="color"]::-webkit-color-swatch {
+        border: none;
+        border-radius: 8px;
+      }
+
+      .hex-input {
+        flex: 1;
+        background: #252525;
+        border: 1px solid #333;
+        border-radius: 10px;
+        padding: 12px 16px;
+        font-size: 18px;
+        font-family: "SF Mono", "Fira Code", monospace;
+        color: #f0f0f0;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        transition: border-color 0.2s;
+      }
+
+      .hex-input:focus {
+        outline: none;
+        border-color: #6366f1;
+      }
+
+      .swatches {
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .swatch {
+        width: 100%;
+        aspect-ratio: 1;
+        border-radius: 8px;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: transform 0.1s, border-color 0.15s;
+      }
+
+      .swatch:hover {
+        transform: scale(1.15);
+      }
+
+      .swatch.active {
+        border-color: #fff;
+      }
+
+      .info-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 8px;
+        margin-bottom: 20px;
+      }
+
+      .info-chip {
+        background: #252525;
+        border-radius: 8px;
+        padding: 8px;
+        text-align: center;
+      }
+
+      .info-chip .label {
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        color: #666;
+        margin-bottom: 4px;
+      }
+
+      .info-chip .value {
+        font-size: 13px;
+        font-family: "SF Mono", "Fira Code", monospace;
+        color: #ccc;
+      }
+
+      .copy-btn {
+        width: 100%;
+        padding: 14px;
+        background: #6366f1;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s, transform 0.1s;
+      }
+
+      .copy-btn:hover {
+        background: #5254cc;
+      }
+
+      .copy-btn:active {
+        transform: scale(0.98);
+      }
+
+      .copy-btn.copied {
+        background: #22c55e;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <h2><span>🎨</span> Color Picker</h2>
+      <div class="preview" id="preview"></div>
+      <div class="color-input-row">
+        <input type="color" id="colorWheel" value="#6366f1" />
+        <input type="text" class="hex-input" id="hexInput" value="#6366F1" maxlength="7" />
+      </div>
+      <div class="swatches" id="swatches"></div>
+      <div class="info-row">
+        <div class="info-chip">
+          <div class="label">R</div>
+          <div class="value" id="rVal">99</div>
+        </div>
+        <div class="info-chip">
+          <div class="label">G</div>
+          <div class="value" id="gVal">102</div>
+        </div>
+        <div class="info-chip">
+          <div class="label">B</div>
+          <div class="value" id="bVal">241</div>
+        </div>
+      </div>
+      <button class="copy-btn" id="copyBtn">Copy HEX</button>
+    </div>
+    <script type="module" src="/src/mcp-app.ts"></script>
+  </body>
+</html>
